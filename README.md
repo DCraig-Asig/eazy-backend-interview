@@ -1,44 +1,22 @@
-# EazyInsure - NestJS Service Template
+# EazyInsure - Backend Interview
 
-> The purpose of this repository is to provide a template for a NestJS service. This template is intended to be used as a starting point for new services.
+### Prerequisites
+* Node 18+
+* PNPM 9+
+* Docker + Docker Compose
 
-### Steps to use this template
-1. Clone this repository
-2. Copy all of the directories and files in this repository into a new folder in the `eazy-core-backend` repository
-3. Perform a project-wise search for `SERVICE_NAME` and replace all occurrences with the name of your service. Eg.: `Admin Management`
-4. Perform a project-wise search for `PACKAGE_SERVICE_NAME` and replace all occurrences with the name of your service with lowercase and dash. Eg.: `admin-management`
-5. Update the `.env` file with the appropriate values
-6. Update the `docker/Dockerfile` exposed port with the appropriate value
-7. Update the `docker-compose.yml` file from `eazy-core-backend` with the appropriate values. Example for `admin-management` service. Make sure to update the paths with the name of your service and the exposed port with the appropriate value.
-```yaml
-admin-management:
-    container_name: admin-management
-    build:
-      context: ./admin-management
-      dockerfile: docker/Dockerfile
-      no_cache: true
-      args:
-        EAZY_NPM_TOKEN: ${EAZY_NPM_TOKEN}
-    env_file:
-      - admin-management/.env
-    volumes:
-      - ./admin-management:/app
-      - ./admin-management/node_modules:/app/node_modules
-    restart: on-failure
-    networks:
-      - eazyinsure
-    ports:
-      - 8001:8001
-    depends_on:
-      - kong
-```
-8. Update the `kong-gateway/config.yaml` from `eazy-core-backend` with the appropriate values. Example for `admin-management` service. Make sure to update the paths with the name of your service and the port with the appropriate value.
-```yaml
- - name: admin-management
-    url: http://admin-management:8001
-    routes:
-      - name: admin-management-routes
-        paths:
-          - /admin-management
-        strip_path: false
-```
+### Installation
+1. Clone the repository
+2. Run `pnpm install` to install the dependencies
+3. Run `docker-compose up` to start the database and the server
+
+### Interview Requirement
+* Create a RESTful API that allows users to retrieve and save the latest exchange rate from the BNR website (https://www.bnr.ro/nbrfxrates.xml) for a given currency against RON.
+* The API needs to accept a single currency code as a parameter and return the exchange rate for that currency against RON. 
+* Before returning the exchange rate, the API should check if the exchange rate is already stored in the database. If it is not, the API should fetch the latest exchange rate from the BNR website and store it in the database before returning it.
+* The database, database table, typeorm entity, controller and service are already created. You need to implement the logic in the service to fetch the exchange rate from the BNR website and store it in the database.
+* The API should be implemented using NestJS and TypeORM.
+* Use the @nestjs/axios module to make the HTTP request to the BNR website.
+* Use the @nestjs/typeorm module to interact with the database.
+* Use the fast-xml-parser module to parse the XML response from the BNR website.
+* Data validation should be done using the class-validator module.

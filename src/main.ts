@@ -8,7 +8,6 @@ import { EErrorCode } from '@resources';
 import { formatErrors } from '@utilities';
 
 import { AppModule } from './app.module';
-import setupSwagger from './swagger';
 
 (async () => {
   const config = getConfig();
@@ -57,13 +56,9 @@ import setupSwagger from './swagger';
     }),
   );
 
-  app.setGlobalPrefix('/service');
-
-  await setupSwagger(app);
-
   await app.listen(config.port);
 
   const appUrl = await app.getUrl();
 
-  Logger.log(`🚀 SERVICE_NAME service is running on: ${appUrl}`);
+  Logger.log(`🚀 Eazy Backend Interview service is running on: ${appUrl}`);
 })();

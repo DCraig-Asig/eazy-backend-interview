@@ -11,13 +11,11 @@ RUN pnpm add -g typescript
 
 COPY package.json pnpm-lock.yaml ./
 
-RUN echo @DCraig-Asig:registry=https://npm.pkg.github.com > .npmrc && echo //npm.pkg.github.com/:_authToken=${EAZY_NPM_TOKEN} >> .npmrc
-
 RUN pnpm install
 
 COPY . .
 
-EXPOSE 3000
+EXPOSE 8000
 
-RUN chmod +x ./docker/scripts/start-local.sh
-ENTRYPOINT sh docker/scripts/start-local.sh
+RUN chmod +x ./docker/start.sh
+ENTRYPOINT sh docker/start.sh

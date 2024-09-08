@@ -10,11 +10,6 @@ export default () => ({
 
   port: +process.env.PORT,
 
-  app: {
-    baseUrl: process.env.APP_BASE_URL,
-    gatewayBaseUrl: process.env.APP_GATEWAY_BASE_URL,
-  },
-
   database: {
     type: 'postgres' as DatabaseType,
     host: process.env.DATABASE_HOST,

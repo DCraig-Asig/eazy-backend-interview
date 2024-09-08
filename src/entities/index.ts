@@ -1,3 +1,5 @@
-export const Entities = [];
+import { ExchangeRate } from './exchange-rate.entity';
 
-export {};
+export const Entities = [ExchangeRate];
+
+export { ExchangeRate };
